@@ -1,0 +1,177 @@
+<canvas
+	id="pixel-rain"
+	class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh w-full"
+	aria-hidden="true"
+></canvas>
+
+<script>
+	const CELL = 12;
+	const SIZE = 7;
+	const BASE_DENSITY = 0.25;
+	const BASE_MAX = 0.09;
+	const HEAD_MAX = 0.25;
+	const DENSITY = 0.3;
+	const SPEED_MIN = 2;
+	const SPEED_MAX = 7;
+	const FADE_TIME = 1.2; // seconds for a background square to fade fully in or out
+	const FADE_STEPS = 4; // visible brightness steps per fade when not SMOOTH
+	const HOVER_RADIUS = 80; // CSS px
+	const HOVER_MAX = 0.3;
+	const HOVER_DECAY = 1.5; // trail fade rate, per second
+	const STILL_TIME = 0.4; // seconds without movement before the cursor counts as resting
+	const SMOOTH = false;
+	const FPS = 12;
+
+	const canvas = document.getElementById('pixel-rain');
+	const ctx = canvas.getContext('2d');
+	// Tailwind only emits theme vars that a class uses, hence the fallback
+	const color =
+		getComputedStyle(document.documentElement).getPropertyValue('--color-aqua').trim() || '#9ed8d6';
+	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+	let dpr = 1, cell = CELL, size = SIZE, cols = 0, rows = 0, ox = 0, oy = 0;
+	let dots = [];
+	let streaks = [];
+	let raf = 0, last = 0;
+	const pointer = { x: -1e4, y: -1e4, moved: 0 };
+
+	const now = () => performance.now() / 1000;
+	const quantize = (v) => (SMOOTH ? v : Math.round(v * FADE_STEPS) / FADE_STEPS);
+
+	function spawn(s, anywhere) {
+		s.len = 8 + Math.random() * 22;
+		s.speed = SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN);
+		s.peak = HEAD_MAX * (0.45 + Math.random() * 0.55);
+		const active = rows + s.len;
+		const idle = active * (1 / DENSITY - 1);
+		s.head = anywhere ? active - Math.random() * (active + idle) : -Math.random() * 2 * idle;
+	}
+
+	function scheduleFade(d, t) {
+		d.next = t + FADE_TIME + (d.on ? 1 + Math.random() * 3 : 1.5 + Math.random() * 4);
+	}
+
+	function resize() {
+		dpr = Math.min(window.devicePixelRatio || 1, 2);
+		const w = Math.round(canvas.clientWidth * dpr);
+		const h = Math.round(canvas.clientHeight * dpr);
+		if (w === canvas.width && h === canvas.height) return;
+		canvas.width = w;
+		canvas.height = h;
+
+		// Device pixels keep squares crisp
+		cell = Math.round(CELL * dpr);
+		size = Math.round(SIZE * dpr);
+		cols = Math.floor((w - size) / cell) + 1;
+		rows = Math.floor((h - size) / cell) + 1;
+		ox = Math.floor((w - (cols - 1) * cell - size) / 2);
+		oy = Math.floor((h - (rows - 1) * cell - size) / 2);
+
+		const t = now();
+		dots = [];
+		for (let c = 0; c < cols; c++) {
+			for (let r = 0; r < rows; r++) {
+				if (Math.random() > BASE_DENSITY) continue;
+				const on = Math.random() < 0.5;
+				dots.push({
+					x: ox + c * cell,
+					y: oy + r * cell,
+					peak: BASE_MAX * (0.2 + 0.8 * Math.pow(Math.random(), 1.5)),
+					on,
+					level: on ? 1 : 0,
+					hover: 0,
+					next: t + Math.random() * 3,
+				});
+			}
+		}
+
+		for (let c = streaks.length; c < cols; c++) {
+			const s = {};
+			spawn(s, true);
+			streaks.push(s);
+		}
+	}
+
+	function step(dt, t) {
+		ctx.globalAlpha = 1;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.fillStyle = color;
+
+		const radius = HOVER_RADIUS * dpr;
+		const resting = Math.min(1, (t - pointer.moved) / STILL_TIME);
+
+		for (const d of dots) {
+			if (dt > 0 && t >= d.next) {
+				d.on = !d.on;
+				scheduleFade(d, t);
+			}
+			const delta = dt / FADE_TIME;
+			d.level = d.on ? Math.min(1, d.level + delta) : Math.max(0, d.level - delta);
+
+			const dist = Math.hypot(d.x + size / 2 - pointer.x, d.y + size / 2 - pointer.y);
+			const target = dist < radius ? Math.pow(1 - dist / radius, 1.5) : 0;
+			d.hover =
+				target > d.hover
+					? d.hover + (target - d.hover) * Math.min(1, dt * 20)
+					: d.hover * Math.exp(-dt * HOVER_DECAY);
+			// While moving every nearby square lights up; at rest they follow their own fade cycle
+			const glow = d.hover * (1 - resting + resting * d.level);
+
+			const a = d.peak * quantize(d.level) + HOVER_MAX * quantize(glow);
+			if (a < 0.005) continue;
+			ctx.globalAlpha = a;
+			ctx.fillRect(d.x, d.y, size, size);
+		}
+
+		for (let c = 0; c < cols; c++) {
+			const s = streaks[c];
+			s.head += s.speed * dt;
+			if (s.head - s.len > rows) spawn(s, false);
+
+			const head = SMOOTH ? s.head : Math.floor(s.head);
+			// ceil keeps d <= len, otherwise pow() goes NaN and reuses the last alpha
+			const top = Math.max(0, Math.ceil(head - s.len));
+			const bottom = Math.min(rows - 1, Math.ceil(head));
+			for (let r = top; r <= bottom; r++) {
+				const d = head - r;
+				const a = d < 0 ? s.peak * (1 + d) : s.peak * Math.pow(1 - d / s.len, 2.2);
+				if (a < 0.01) continue;
+				ctx.globalAlpha = a;
+				ctx.fillRect(ox + c * cell, oy + r * cell, size, size);
+			}
+		}
+	}
+
+	function loop(ms) {
+		const dt = (ms - last) / 1000;
+		if (SMOOTH || dt >= 1 / FPS) {
+			step(Math.min(dt, 0.25), ms / 1000);
+			last = ms;
+		}
+		raf = requestAnimationFrame(loop);
+	}
+
+	function start() {
+		cancelAnimationFrame(raf);
+		if (reduceMotion.matches) return step(0, now());
+		last = performance.now();
+		raf = requestAnimationFrame(loop);
+	}
+
+	new ResizeObserver(() => {
+		resize();
+		if (reduceMotion.matches) step(0, now());
+	}).observe(canvas);
+	reduceMotion.addEventListener('change', start);
+	window.addEventListener('pointermove', (e) => {
+		if (e.pointerType === 'touch') return;
+		pointer.x = e.clientX * dpr;
+		pointer.y = e.clientY * dpr;
+		pointer.moved = now();
+	});
+	document.documentElement.addEventListener('pointerleave', () => {
+		pointer.x = pointer.y = -1e4;
+	});
+	resize();
+	start();
+</script>
