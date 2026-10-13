@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Dummy content for scroll testing; replace with real projects later
+const projects = [
+	{ name: 'Project One', kind: 'Web app', year: '2026', blurb: 'One-line description of what this project is and the problem it solved.' },
+	{ name: 'Project Two', kind: 'Brand site', year: '2025', blurb: 'One-line description of what this project is and the problem it solved.' },
+	{ name: 'Project Three', kind: 'Mobile UI', year: '2025', blurb: 'One-line description of what this project is and the problem it solved.' },
+	{ name: 'Project Four', kind: 'Side project', year: '2024', blurb: 'One-line description of what this project is and the problem it solved.' },
+];
+---
+
+<Base title="Mark Simon Bringas">
+	<header class="absolute inset-x-0 top-0 px-4 pt-6 sm:px-10 sm:pt-8">
+		<a href="/" class="font-display text-sm font-medium tracking-[0.18em] text-paper/75 uppercase transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">
+			Markymatics
+		</a>
+	</header>
+
+	<main>
+		<section class="relative grid min-h-dvh place-items-center px-4 py-24">
+			<div class="flex flex-col items-center gap-6 sm:gap-8">
+				<svg
+					class="size-7 text-gold sm:size-9"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					aria-hidden="true"
+				>
+					<path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z" />
+				</svg>
+				<h1 class="text-center font-display text-[clamp(2.5rem,8vw,5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
+					Woah!
+					<span class="block font-light text-aqua">How did you get here<span class="text-gold">?</span></span>
+				</h1>
+			</div>
+
+			<a
+				href="#me"
+				aria-label="Scroll down to personal details"
+				class="absolute inset-x-0 bottom-6 mx-auto grid size-16 place-items-center rounded-full text-paper/60 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-aqua sm:bottom-10"
+			>
+				<svg class="size-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="m7 6 5 5 5-5" />
+					<path d="m7 13 5 5 5-5" />
+				</svg>
+			</a>
+		</section>
+
+		<div class="mx-auto max-w-2xl space-y-24 px-4 pb-32 sm:space-y-32">
+			<section id="me" class="pt-16">
+				<div class="flex items-center gap-3 sm:gap-4">
+					<button
+						id="name-toggle"
+						type="button"
+						aria-label="Swap name and nickname"
+						class="grid size-10 shrink-0 cursor-pointer place-items-center rounded-full border border-paper/15 text-aqua transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
+					>
+						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<path d="m17 2 4 4-4 4" />
+							<path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+							<path d="m7 22-4-4 4-4" />
+							<path d="M21 13v1a4 4 0 0 1-4 4H3" />
+						</svg>
+					</button>
+					<h2 id="name" data-alt="markymatics" aria-live="polite" class="min-w-0 font-display text-[2rem] leading-tight font-bold tracking-[-0.03em] sm:text-5xl">Mark Simon Bringas</h2>
+				</div>
+				<p class="mt-4 text-lg text-paper/90">Aspiring Software Developer &amp; Data Scientist</p>
+				<p class="mt-1 text-paper/65">Computer Science Student @ University of Baguio</p>
+			</section>
+
+			<section>
+				<h2 class="font-display text-3xl font-bold tracking-[-0.02em]">About</h2>
+				<div class="mt-6 max-w-[65ch] space-y-4 leading-relaxed text-paper/80">
+					<p>
+						Placeholder copy. This is where a short introduction goes: who you are, what you make, and what
+						kind of work you want more of. Two or three sentences is usually enough to set the tone.
+					</p>
+					<p>
+						A second paragraph can cover how you work, the tools you reach for, or a detail that makes you
+						memorable. Keep it plain and specific rather than listing every skill.
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="font-display text-3xl font-bold tracking-[-0.02em]">Selected work</h2>
+				<ul class="mt-6 divide-y divide-paper/10 border-y border-paper/10">
+					{projects.map((p) => (
+						<li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-x-6">
+							<h3 class="font-display text-lg font-medium">{p.name}</h3>
+							<p class="text-sm text-paper/60 tabular-nums sm:text-right">{p.kind} · {p.year}</p>
+							<p class="leading-relaxed text-paper/80 sm:col-span-2">{p.blurb}</p>
+						</li>
+					))}
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="font-display text-3xl font-bold tracking-[-0.02em]">Experience</h2>
+				<div class="mt-6 max-w-[65ch] space-y-4 leading-relaxed text-paper/80">
+					<p>
+						Placeholder copy. A few lines on roles, studios, or clients. This block is here mostly to make the
+						page long enough to test the background while scrolling.
+					</p>
+					<p>
+						More placeholder copy. Real content will replace this once the structure of the portfolio is
+						decided.
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="font-display text-3xl font-bold tracking-[-0.02em]">Contact</h2>
+				<p class="mt-6 leading-relaxed text-paper/80">
+					Placeholder: <a href="mailto:hello@example.com" class="text-aqua underline decoration-aqua/40 underline-offset-4 transition-colors hover:decoration-aqua focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">hello@example.com</a>
+				</p>
+			</section>
+		</div>
+	</main>
+</Base>
+
+<script>
+	const name = document.getElementById('name');
+	document.getElementById('name-toggle').addEventListener('click', () => {
+		[name.textContent, name.dataset.alt] = [name.dataset.alt, name.textContent];
+	});
+</script>
