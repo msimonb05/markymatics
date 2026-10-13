@@ -1,6 +1,6 @@
 # Personal Portfolio - markymatics
 
-Greetings and welcome to my personal portfolio created with Astro, React, and Tailwind CSS, written in JavaScript and run with Bun.
+Greetings and welcome to my personal portfolio created with Astro, React, and Tailwind CSS, written in JavaScript, managed with Bun, and hosted on Cloudflare Pages.
 
 ## Tech Stack
 
@@ -9,6 +9,8 @@ Greetings and welcome to my personal portfolio created with Astro, React, and Ta
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Bun](https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare_Pages-F38020?style=for-the-badge&logo=cloudflarepages&logoColor=white)
 
 | Category | Technology |
 | :--- | :--- |
@@ -16,9 +18,13 @@ Greetings and welcome to my personal portfolio created with Astro, React, and Ta
 | UI library | React |
 | Styling | Tailwind CSS |
 | Language | JavaScript |
-| Package manager and runtime | Bun |
+| Package manager | Bun |
+| Runtime | Node.js |
+| Hosting | Cloudflare Pages |
 
 ## How to Run Locally
+
+Requires Bun and Node.js 22.12 or newer.
 
 | Command | Action |
 | :--- | :--- |
