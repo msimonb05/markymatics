@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #191a2c;    /* 60% background */
+  --color-teal: #2b7679;   /* 30% secondary */
+  --color-gold: #d4a84f;   /* 10% accent */
+  --color-aqua: #9ed8d6;
+  --color-indigo: #23366f;
+  --color-violet: #7b68c8;
+  --color-paper: #f2f6f4;
+
+  /* Primary: Space Grotesk for headings, wordmark. */ 
+  /* Secondary: Instrument Sans for body/UI text. */
+  --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scrollbar-color: var(--color-teal) var(--color-ink);
+  }
+}
