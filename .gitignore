@@ -34,3 +34,6 @@ skills-lock.json
 
 # personal learning notes
 docs/
+
+# wrangler
+.wrangler/
