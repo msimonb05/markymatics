@@ -1,3 +1,0 @@
-[run]
-# Run scripts/CLIs with Bun's runtime instead of Node (same as `bun --bun run`).
-bun = true
