@@ -13,6 +13,48 @@
   /* Secondary: Instrument Sans for body/UI text. */
   --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
   --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
+
+  /* Name/nickname photo glitch: steps(1) makes every keyframe a hard jump */
+  --animate-glitch-jitter: glitch-jitter 450ms steps(1, end) both;
+  --animate-glitch-split-a: glitch-split-a 450ms steps(1, end) both;
+  --animate-glitch-split-b: glitch-split-b 450ms steps(1, end) both;
+  --animate-glitch-bar: glitch-bar 450ms steps(1, end) both;
+
+  @keyframes glitch-jitter {
+    0%, 100% { transform: none; }
+    15% { transform: translate(-4px, 1px); }
+    30% { transform: translate(3px, -1px); }
+    45% { transform: translate(-2px, 0); }
+    60% { transform: translate(5px, 1px); }
+    75% { transform: translate(-3px, -1px); }
+    90% { transform: translate(1px, 0); }
+  }
+
+  @keyframes glitch-split-a {
+    0% { clip-path: inset(10% 0 70% 0); transform: translateX(-8px); }
+    20% { clip-path: inset(55% 0 20% 0); transform: translateX(-4px); }
+    40% { clip-path: inset(30% 0 45% 0); transform: translateX(-10px); }
+    60% { clip-path: inset(80% 0 5% 0); transform: translateX(-6px); }
+    80% { clip-path: inset(0 0 85% 0); transform: translateX(-3px); }
+    100% { clip-path: inset(50% 0 50% 0); transform: none; }
+  }
+
+  @keyframes glitch-split-b {
+    0% { clip-path: inset(60% 0 15% 0); transform: translateX(8px); }
+    20% { clip-path: inset(5% 0 75% 0); transform: translateX(5px); }
+    40% { clip-path: inset(70% 0 10% 0); transform: translateX(10px); }
+    60% { clip-path: inset(25% 0 50% 0); transform: translateX(4px); }
+    80% { clip-path: inset(85% 0 0 0); transform: translateX(7px); }
+    100% { clip-path: inset(50% 0 50% 0); transform: none; }
+  }
+
+  @keyframes glitch-bar {
+    0% { top: 22%; }
+    25% { top: 68%; }
+    50% { top: 41%; }
+    75% { top: 86%; }
+    100% { top: 12%; opacity: 0; }
+  }
 }
 
 @layer base {
