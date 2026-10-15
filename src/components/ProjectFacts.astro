@@ -1,0 +1,27 @@
+---
+import TechPills from './TechPills.astro';
+
+const { data } = Astro.props;
+---
+
+<dl class="grid max-w-[75ch] grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-body">
+	{data.led && (
+		<>
+			<dt class="pt-0.5 font-display text-small font-medium tracking-[0.16em] text-aqua uppercase">Led</dt>
+			<dd class="text-paper/80">{data.led}</dd>
+		</>
+	)}
+	<dt class="pt-0.5 font-display text-small font-medium tracking-[0.16em] text-aqua uppercase">Built</dt>
+	<dd class="text-paper/80">{data.built}</dd>
+</dl>
+
+{data.outcome && (
+	<p class="mt-5 flex max-w-[75ch] items-baseline gap-3 text-body font-medium text-paper">
+		<span class="h-0.5 w-4 shrink-0 -translate-y-1 bg-gold" aria-hidden="true"></span>
+		{data.outcome}
+	</p>
+)}
+
+<div class="mt-5">
+	<TechPills stack={data.stack} />
+</div>

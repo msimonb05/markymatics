@@ -1,0 +1,18 @@
+---
+import { techIcons } from '../data/tech.js';
+
+const { stack } = Astro.props;
+---
+
+<ul class="flex flex-wrap gap-2" aria-label="Tech stack">
+	{stack.map((tech) => (
+		<li class="inline-flex items-center gap-1.5 rounded-full border border-paper/15 bg-ink/60 px-3 py-1 text-small text-paper/80">
+			{techIcons[tech] && (
+				<svg class="size-3.5 shrink-0 text-aqua" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+					<path d={techIcons[tech].path} />
+				</svg>
+			)}
+			{tech}
+		</li>
+	))}
+</ul>

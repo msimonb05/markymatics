@@ -1,0 +1,28 @@
+---
+import { icons } from '../data/icons.js';
+
+const { project, more = false } = Astro.props;
+const { data, id } = project;
+const links = [
+	data.github && { href: data.github, label: 'GitHub', icon: icons.github },
+	data.live && { href: data.live, label: 'Live site', icon: icons.external },
+].filter(Boolean);
+const linkClass =
+	'inline-flex items-center gap-2 text-small transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua';
+---
+
+{(more || links.length > 0) && (
+	<div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+		{more && (
+			<a href={`/projects/${id}/`} class={`${linkClass} font-medium text-aqua`}>
+				Read more<span class="sr-only"> about {data.short}</span>
+			</a>
+		)}
+		{links.map((l) => (
+			<a href={l.href} target="_blank" rel="noopener noreferrer" class={`${linkClass} text-paper/75`}>
+				<svg class="size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d={l.icon} /></svg>
+				{l.label}<span class="sr-only"> for {data.short} (opens in a new tab)</span>
+			</a>
+		))}
+	</div>
+)}
