@@ -13,7 +13,7 @@ github: https://github.com/msimonb05/WhiteL-Studio
 
 ## The problem
 
-WhiteL Studio, an independent animation and game studio in the Philippines with more than 15 people, needed a portfolio site that its staff could update without a developer.
+WhiteL Studio, an independent animation and game studio with more than 15 people, needed a portfolio site that its staff could update without a developer.
 
 ## What I am building
 
