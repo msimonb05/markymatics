@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
+import ProjectPeek from '../components/ProjectPeek.astro';
 import TechPills from '../components/TechPills.astro';
 import { icons } from '../data/icons.js';
 import { skills } from '../data/skills.js';
@@ -183,6 +184,9 @@ const built = projects.filter((p) => p.data.group === 'built');
 							<p class="mt-2 max-w-[65ch] text-lead text-paper/85">{p.data.tagline}</p>
 							<div class="mt-4">
 								<TechPills stack={p.data.stack} />
+							</div>
+							<div class="mt-4 empty:hidden">
+								<ProjectPeek project={p} count={3} />
 							</div>
 							<div class="mt-4">
 								<ProjectLinks project={p} more />

@@ -1,6 +1,7 @@
 ---
 import ProjectFacts from './ProjectFacts.astro';
 import ProjectLinks from './ProjectLinks.astro';
+import ProjectPeek from './ProjectPeek.astro';
 
 const { project } = Astro.props;
 const { data, id } = project;
@@ -17,6 +18,9 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 	<p class="mt-4 max-w-[65ch] text-lead text-paper/90">{data.tagline}</p>
 	<div class="mt-6">
 		<ProjectFacts data={data} />
+	</div>
+	<div class="mt-6 empty:hidden">
+		<ProjectPeek project={project} />
 	</div>
 	<div class="mt-6">
 		<ProjectLinks project={project} more />
