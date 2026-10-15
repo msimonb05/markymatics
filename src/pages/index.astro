@@ -7,16 +7,16 @@ import ProjectLinks from '../components/ProjectLinks.astro';
 import TechPills from '../components/TechPills.astro';
 import { icons } from '../data/icons.js';
 import { skills } from '../data/skills.js';
-import lanyard from '../assets/photos/lanyard.jpg';
-import graduation from '../assets/photos/graduation.jpg';
-import mirror from '../assets/photos/mirror.webp';
-import avatar from '../assets/photos/6.jpg';
+import cordinnovationPic from '../assets/photos/cordinnovation_pic.jpg';
+import graduationPic from '../assets/photos/graduation_pic.jpg';
+import mirrorSelfie from '../assets/photos/mirror_selfie.webp';
+import kiibo from '../assets/photos/kiibo.jpg';
 
 // Shown in this order; the wide graduation shot is cropped square around the face
 const photos = [
-	{ src: lanyard, position: 'object-center' },
-	{ src: graduation, position: 'object-[80%_50%]' },
-	{ src: mirror, position: 'object-center' },
+	{ src: cordinnovationPic, position: 'object-center' },
+	{ src: graduationPic, position: 'object-[80%_50%]' },
+	{ src: mirrorSelfie, position: 'object-center' },
 ];
 
 const socials = [
@@ -83,10 +83,10 @@ const built = projects.filter((p) => p.data.group === 'built');
 							/>
 						))}
 						<Image
-							src={avatar}
+							src={kiibo}
 							alt=""
 							height={512}
-							data-avatar
+							data-kiibo
 							class="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-1000 group-data-glitching:animate-glitch-jitter group-data-glitching:transition-none"
 						/>
 						<!-- Glitch layers: palette-tinted copies of the incoming image, shown only while glitching -->
@@ -214,7 +214,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 	const nameAlt = document.getElementById('name-alt');
 	const frame = document.getElementById('photos');
 	const photos = frame.querySelectorAll('[data-photo]');
-	const avatar = frame.querySelector('[data-avatar]');
+	const kiibo = frame.querySelector('[data-kiibo]');
 	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 	let current = 0;
 	let marky = false;
@@ -222,11 +222,11 @@ const built = projects.filter((p) => p.data.group === 'built');
 
 	const setVisible = (img, on) =>
 		img.classList.replace(on ? 'opacity-0' : 'opacity-100', on ? 'opacity-100' : 'opacity-0');
-	const shown = () => (marky ? avatar : photos[current]);
+	const shown = () => (marky ? kiibo : photos[current]);
 
 	function render() {
 		photos.forEach((p, i) => setVisible(p, !marky && i === current));
-		setVisible(avatar, marky);
+		setVisible(kiibo, marky);
 		frame.setAttribute('aria-label', marky ? 'Manga avatar of markymatics' : 'Photos of Mark Simon Bringas');
 	}
 
