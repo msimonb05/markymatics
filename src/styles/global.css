@@ -14,6 +14,23 @@
   --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
   --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
 
+  /* Type scale, largest to smallest. The hero ("Woah!") is intentionally outside it. */
+  --text-display: clamp(2.75rem, 9vw, 6rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+  --text-headline: clamp(1.875rem, 1.2rem + 2.6vw, 3rem);
+  --text-headline--line-height: 1.15;
+  --text-headline--letter-spacing: -0.025em;
+  --text-title: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.02em;
+  --text-lead: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-body: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --text-body--line-height: 1.65;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.45;
+
   /* Name/nickname photo glitch: steps(1) makes every keyframe a hard jump */
   --animate-glitch-jitter: glitch-jitter 450ms steps(1, end) both;
   --animate-glitch-split-a: glitch-split-a 450ms steps(1, end) both;
