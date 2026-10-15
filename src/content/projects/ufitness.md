@@ -10,7 +10,7 @@ group: led
 led: A five-member team in Trello, from concept to a feature-complete app presented at a university open house.
 built: The database architecture and authentication behind the app, using Cloud Firestore and Firebase Authentication with email and Google sign-in.
 outcome: More than 100 downloads on campus.
-stack: [React Native, Expo, Firebase Authentication, Cloud Firestore, expo-calendar, expo-sensors, react-native-svg]
+stack: [React Native, Expo, Firebase Authentication, Cloud Firestore]
 github: https://github.com/rjsalcedo-dev/UFitness-IOS-
 live: https://ufitness-booth.netlify.app/
 liveLabel: Get the app
