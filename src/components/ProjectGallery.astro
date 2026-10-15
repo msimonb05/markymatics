@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import { screenshotsFor } from '../data/screenshots.js';
+
+const { slug, name, captions = {} } = Astro.props;
+const shots = screenshotsFor(slug).map(({ key, src, portrait }) => {
+	const words = key.replace(/^\d+-/, '').replace(/-/g, ' ');
+	const label = words === 'mobile' ? 'phone screens' : words;
+	return { src, alt: `${name} screenshot: ${label}`, caption: captions[key] ?? '', portrait };
+});
+// Phone-only sets get a taller frame on small screens so the screens stay readable
+const frame = shots.every((s) => s.portrait) ? 'aspect-4/5 sm:aspect-16/10' : 'aspect-16/10';
+const button =
+	'grid size-11 cursor-pointer place-items-center rounded-full border border-paper/15 text-paper/75 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua disabled:cursor-default disabled:opacity-30 disabled:hover:border-paper/15 disabled:hover:text-paper/75';
+---
+
+{shots.length > 0 && (
+	<section aria-labelledby="screenshots-title" class="mt-14">
+		<h2 id="screenshots-title" class="font-display text-title font-bold">Screenshots</h2>
+		<div data-carousel role="region" aria-roledescription="carousel" aria-labelledby="screenshots-title" class="mt-6">
+			<ul
+				data-track
+				tabindex="0"
+				aria-label="Swipe or use the arrow keys to browse"
+				class="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
+			>
+				{shots.map((s, i) => (
+					<li data-caption={s.caption} class="w-full shrink-0 snap-center" aria-roledescription="slide" aria-label={`${i + 1} of ${shots.length}`}>
+						<a
+							href={s.src.src}
+							target="_blank"
+							rel="noopener noreferrer"
+							tabindex="-1"
+							class:list={['relative block border border-paper/15 bg-ink transition-colors hover:border-gold/60', frame]}
+						>
+							<Image
+								src={s.src}
+								alt={s.alt}
+								widths={[480, 960, 1600]}
+								sizes="(min-width: 1024px) 1100px, 100vw"
+								loading={i === 0 ? 'eager' : 'lazy'}
+								class="absolute inset-0 size-full object-contain"
+							/>
+						</a>
+					</li>
+				))}
+			</ul>
+			<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
+				<p data-text aria-live="polite" class="min-h-[2lh] flex-1 text-body text-paper/80">{shots[0].caption}</p>
+				<div class="flex items-center justify-end gap-4">
+					<p data-count class="text-small text-paper/65 tabular-nums">1 / {shots.length}</p>
+					<button data-prev type="button" aria-label="Previous screenshot" disabled class={button}>
+						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+					</button>
+					<button data-next type="button" aria-label="Next screenshot" class={button}>
+						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+)}
+
+<script>
+	const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+
+	for (const root of document.querySelectorAll('[data-carousel]')) {
+		const track = root.querySelector('[data-track]');
+		const slides = [...track.children];
+		const text = root.querySelector('[data-text]');
+		const count = root.querySelector('[data-count]');
+		const prev = root.querySelector('[data-prev]');
+		const next = root.querySelector('[data-next]');
+		// Slides are as wide as the track, so the position is just the scroll offset in slide widths
+		const current = () => Math.round(track.scrollLeft / track.clientWidth);
+		const go = (i) => track.scrollTo({ left: i * track.clientWidth, behavior });
+
+		let shown = 0;
+		const update = () => {
+			const i = current();
+			if (i === shown) return;
+			shown = i;
+			text.textContent = slides[i].dataset.caption;
+			count.textContent = `${i + 1} / ${slides.length}`;
+			prev.disabled = i === 0;
+			next.disabled = i === slides.length - 1;
+		};
+
+		prev.addEventListener('click', () => go(Math.max(0, current() - 1)));
+		next.addEventListener('click', () => go(Math.min(slides.length - 1, current() + 1)));
+		track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+	}
+</script>

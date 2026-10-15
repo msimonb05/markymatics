@@ -11,6 +11,13 @@ built: The Node.js, Express and MongoDB back end, including session-based accoun
 stack: [Node.js, Express, MongoDB, EJS, Socket.IO, Resend, Render]
 github: https://github.com/msimonb05/ws2-ecommerce-project-g2
 live: https://sb-ecommerce-lryp.onrender.com/
+screenshots:
+  01-home-hero: "Home: new arrivals up front."
+  02-categories: "Shop by category, then the latest arrivals."
+  03-collection: "Collection: filters for brand, price and size."
+  04-product: "Product page: size selection, add to bag and favorites."
+  05-help-center: "Help center: order tracking, returns, shipping and contact."
+  06-mobile: "On phones: home, the collection and a product page."
 ---
 
 ## The project

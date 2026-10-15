@@ -11,6 +11,10 @@ led: A five-member team through architecture and delivery, using Rapid Applicati
 built: The MongoDB data model and the Node.js and Express back end with EJS views, covering orders, payments, refunds, attendance and sales reports.
 outcome: Cut average transaction time by 48% and remains in use at the restaurant.
 stack: [Node.js, Express, EJS, MongoDB]
+screenshots:
+  01-staff-orders: "Staff view: the menu and today's orders, with refund requests."
+  02-menu-management: "Admin view: adding and editing menu items, prices and categories."
+  03-transactions: "Transaction records: cash and QR payments, PWD/senior discounts and refunds."
 ---
 
 ## The problem

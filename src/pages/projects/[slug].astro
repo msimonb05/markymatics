@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ProjectFacts from '../../components/ProjectFacts.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
 import ProjectLinks from '../../components/ProjectLinks.astro';
 
 export async function getStaticPaths() {
@@ -40,6 +41,8 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 		<div class="mt-6">
 			<ProjectLinks project={project} />
 		</div>
+
+		<ProjectGallery slug={project.id} name={data.short} captions={data.screenshots} />
 
 		<hr class="mt-12 h-0.5 w-20 border-0 bg-gold" />
 

@@ -11,6 +11,13 @@ led: Requirements and delivery for the Service Records subsystem, including a 12
 built: The Service Records microservice in Node.js, Express and MongoDB Atlas, with an append-only audit log, HMAC-signed webhooks, a transactional outbox, and CI/CD through GitHub Actions, Docker and Kubernetes.
 outcome: In development for more than 5,000 employees across the division.
 stack: [Node.js, Express, MongoDB Atlas, GitHub Actions, Docker, Kubernetes, Vitest, Supertest]
+screenshots:
+  01-dashboard: "Dashboard: leave waiting for approval, remaining leave credits and a summary of service."
+  02-apply-for-leave: "Apply for leave: CS Form 6 as a three-step form that lists only the leave types that apply."
+  03-leave-details: "Leave details: each signing step, and the credits waiting to be certified."
+  04-team-calendar: "Team calendar: who in the unit is on approved or pending leave this month."
+  05-service-record: "Service record: current position, salary and the next step increment and loyalty pay."
+  06-mobile: "On phones: the dashboard, the approval queue and a service record."
 ---
 
 ## The problem

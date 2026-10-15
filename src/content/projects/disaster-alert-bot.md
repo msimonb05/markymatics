@@ -10,6 +10,11 @@ led: Scope and research for a five-document knowledge base compiled from governm
 built: A retrieval-augmented generation (RAG) chatbot running Llama 3.2 through Ollama, LangChain and Hugging Face, with a Flask and FastAPI back end that adds live OpenWeatherMap and Serper data, packaged with Docker.
 stack: [Python, Llama 3.2, Ollama, LangChain, Hugging Face, Flask, FastAPI, Docker]
 github: https://github.com/msimonb05/disaster-alert-bot
+screenshots:
+  01-home: "Home: emergency hotlines, live weather, and the latest PAGASA and PHIVOLCS warnings."
+  02-go-bag: "A preparedness answer drawn from the government and NGO guides in the knowledge base."
+  03-typhoon-status: "A typhoon question answered from PAGASA's latest bulletin."
+  04-mobile: "On phones: the same chat, including local emergency contacts for Baguio."
 ---
 
 ## The problem

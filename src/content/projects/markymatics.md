@@ -10,6 +10,13 @@ built: A static Astro site styled with Tailwind CSS, with an animated canvas bac
 stack: [Astro, Tailwind CSS, JavaScript, Bun, Cloudflare Pages]
 github: https://github.com/msimonb05/markymatics
 live: https://markymatics.pages.dev/
+screenshots:
+  01-hero: "The opening screen."
+  02-intro: "Introduction: name, role, a short statement and social links."
+  03-projects: "Projects: what I led and what I built on each team."
+  04-project-page: "A project page: role, team, dates, tech stack and write-up."
+  05-skills: "Skills grouped by area, with logos."
+  06-mobile: "On phones: the opening screen, introduction and projects."
 ---
 
 ## The project

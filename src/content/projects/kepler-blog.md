@@ -10,6 +10,13 @@ built: A hand-coded, multi-page static site with articles, service pages and a r
 stack: [HTML, CSS, Netlify]
 github: https://github.com/msimonb05/kepler-blog-revised
 live: https://kepler-blog.netlify.app/
+screenshots:
+  01-home-hero: "Home: the Kepler Blog title over Earth from orbit."
+  02-latest-news: "Latest Stellar News: recent space stories with images."
+  03-services: "Services: NASA's daily image and a global temperature and wind map."
+  04-about: "About: the blog's objective and the developer."
+  05-article: "Article: the April 2024 total solar eclipse over North America."
+  06-mobile: "On phones: home, services and an article."
 ---
 
 ## The project

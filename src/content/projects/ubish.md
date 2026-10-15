@@ -12,6 +12,10 @@ built: The back end for every module except announcements, including accounts wi
 outcome: Built for a community of more than 1,500 residents.
 stack: [PHP, MariaDB]
 github: https://github.com/SzenInso/UBISH-BarangaySystem
+screenshots:
+  01-home: "Public site: barangay announcements and services for residents."
+  02-dashboard: "Staff dashboard: announcements, documents, residency records and reports."
+  03-add-household: "Add household: the household head, address and each family member, recorded in steps."
 ---
 
 ## The problem

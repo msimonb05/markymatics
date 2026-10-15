@@ -11,6 +11,12 @@ led: A five-member team in Trello, from concept to a feature-complete app presen
 built: The database architecture and authentication behind the app, using Cloud Firestore and Firebase Authentication with email and Google sign-in.
 outcome: More than 100 downloads on campus.
 stack: [React Native, Expo, Firebase Authentication, Cloud Firestore, expo-calendar, expo-sensors, react-native-svg]
+screenshots:
+  01-summary: "Summary: today's workout windows, steps and water intake."
+  02-smart-windows: "Daily schedule: free time between classes, rated Gold or Silver for a workout."
+  03-discover: "Discover: routines filtered by type, length and whether they fit a dorm room."
+  04-workout: "Workout details: length, calories and exercises before starting."
+  05-compete: "Compete: today's leaderboard among students."
 ---
 
 ## The problem
