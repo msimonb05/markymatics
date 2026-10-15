@@ -19,6 +19,8 @@ const projects = defineCollection({
 		stack: z.array(z.string()),
 		github: z.url().optional(),
 		live: z.url().optional(),
+		// Overrides the default "Live site" label, e.g. "Get the app"
+		liveLabel: z.string().optional(),
 		// Carousel captions keyed by screenshot file name, e.g. 01-dashboard
 		screenshots: z.record(z.string(), z.string()).optional(),
 	}),
