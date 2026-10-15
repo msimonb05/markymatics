@@ -17,6 +17,11 @@ const { title = 'Markymatics' } = Astro.props;
 	</head>
 	<body class="min-h-dvh bg-ink text-paper font-sans antialiased selection:bg-gold selection:text-ink">
 		<PixelRain />
+		<header class="absolute inset-x-0 top-0 px-4 pt-6 sm:px-10 sm:pt-8">
+			<a href="/" class="font-display text-small font-medium tracking-[0.18em] text-paper/75 uppercase transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">
+				Markymatics
+			</a>
+		</header>
 		<slot />
 	</body>
 </html>
