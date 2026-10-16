@@ -1,13 +1,14 @@
-<!-- Hidden until the hero is out of view; also hidden while the contact form is on screen so it never covers it -->
+<!-- Hidden until the hero is out of view; also hidden while the contact form is on screen so it never covers it.
+     The appear animation replays each time it is shown, because showing a display:none element restarts CSS animations. -->
 <button
 	id="back-to-top"
 	type="button"
 	aria-label="Back to top"
 	title="Back to top"
 	hidden
-	class="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 grid size-11 cursor-pointer place-items-center rounded-full border border-paper/15 bg-ink/90 text-paper/75 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))]"
+	class="group fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 grid size-11 cursor-pointer place-items-center rounded-full border border-paper/15 bg-ink/90 text-paper/75 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] motion-safe:animate-[reveal-step_300ms_var(--ease-reveal)_both]"
 >
-	<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+	<svg class="size-5 motion-safe:transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-focus-visible:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 		<path d="m18 15-6-6-6 6" />
 	</svg>
 </button>
