@@ -1,22 +1,24 @@
 ---
 title: 'markymatics: Personal Portfolio'
 short: markymatics
-tagline: 'This website: a personal portfolio built with Astro and Tailwind CSS, including an interactive background and a dedicated page for each project.'
+tagline: 'This website: a personal portfolio built with Astro and Tailwind CSS, with project screenshots, certifications and a working contact form.'
 role: Yours truly, the Developer
 period: Oct 2026 – Present
 sort: 202610
 group: built
-built: A static Astro site styled with Tailwind CSS, with an animated canvas background, a photo slideshow with a glitch effect, and project pages generated from Markdown content collections, deployed on Cloudflare Pages.
-stack: [Astro, Tailwind CSS, JavaScript, Bun, Cloudflare Pages]
+built: A static Astro site styled with Tailwind CSS, with an animated canvas background, screenshot carousels, certificate popups and a contact form that sends email through a Cloudflare Pages Function and Resend, deployed on Cloudflare Pages.
+stack: [Astro, Tailwind CSS, JavaScript, Bun, Cloudflare Pages, Resend]
 github: https://github.com/msimonb05/markymatics
 live: https://markymatics.pages.dev/
 screenshots:
-  01-hero: "The opening screen."
+  01-hero: "The opening screen, where the question decodes from random characters."
   02-intro: "Introduction: name, role, a short statement and social links."
-  03-projects: "Projects: what I led and what I built on each team."
-  04-project-page: "A project page: role, team, dates, tech stack and write-up."
+  03-projects: "Projects: what I led and built on each team, with screenshot previews."
+  04-project-page: "A project page: role, dates and tech stack, then a captioned screenshot carousel."
   05-skills: "Skills grouped by area, with logos."
-  06-mobile: "On phones: the opening screen, introduction and projects."
+  06-certifications: "Certifications: each badge opens the certificate with its description."
+  07-contact: "Contact: a form that emails me directly, with links to my profiles."
+  08-mobile: "On phones: the opening screen, the section menu and a project page."
 ---
 
 ## The project
@@ -25,9 +27,11 @@ This portfolio is the site you are reading. I designed and built it from scratch
 
 ## What I did
 
-- The background is a canvas grid of aqua squares. Streaks of light fall down the columns in stepped motion, background squares fade in and out, and squares near the cursor light up as it moves.
-- The introduction rotates through photos with a crossfade, and swapping my name for my nickname triggers a glitch effect in the palette's colors.
-- Each project is a Markdown file in an Astro content collection with a validated schema, and every project gets its own generated page.
-- Typography follows a six-step type scale defined in the Tailwind theme, and the layout adapts from 320-pixel phones to wide desktop screens.
+- The background is a canvas grid of aqua squares. Streaks of light fall down the columns in stepped motion and speed up while the page scrolls, and squares near the cursor light up as it moves.
+- The opening question decodes from random characters, and swapping my name for my nickname triggers a glitch effect in the palette's colors. Sections fade in as they scroll into view, and every animation turns off for visitors who prefer reduced motion.
+- Each project is a Markdown file in an Astro content collection with a validated schema. Project pages show a captioned screenshot carousel, and the home page shows a strip of previews. I captured the screenshots with Playwright, from the live sites or from local copies running on test data.
+- Certifications appear as badges that open the full certificate, its description and its skills in a native dialog.
+- The contact form posts to a Cloudflare Pages Function that sends the message through Resend. It validates every field on the server, keeps the API key in an encrypted secret, and stops spam with a honeypot field, a minimum fill time and Cloudflare Turnstile.
+- A fixed header links to each section, with a menu on phones, and the layout adapts from 320-pixel phones to wide desktop screens.
 
-The site is built as static pages and served from Cloudflare Pages, with Bun as the package manager.
+The site is built as static pages with one serverless function, served from Cloudflare Pages, with Bun as the package manager.
