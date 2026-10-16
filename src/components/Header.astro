@@ -7,6 +7,7 @@ const sections = [
 ];
 const link =
 	'transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua';
+const onResume = Astro.url.pathname.replace(/\/$/, '') === '/resume';
 // view-box origin = the icon's centre, so each line turns around the middle of the button
 const line = 'origin-center [transform-box:view-box] motion-safe:transition-[transform,opacity] motion-safe:duration-200 motion-safe:ease-out';
 ---
@@ -17,11 +18,21 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 		<!-- The home page's name swap also updates this (#site-name) -->
 		<a href="/" id="site-name" class:list={[link, 'whitespace-nowrap']}>Mark Simon Bringas</a>
 
-		<nav aria-label="Sections" class="hidden md:block">
-			<ul class="flex gap-6">
+		<nav aria-label="Sections" class="hidden lg:block">
+			<ul class="flex items-center gap-6">
 				{sections.map((s) => (
 					<li><a href={`/#${s.id}`} class={link}>{s.label}</a></li>
 				))}
+				<li>
+					<!-- A separate page, so it's a pill rather than another section link -->
+					<a
+						href="/resume/"
+						aria-current={onResume ? 'page' : undefined}
+						class="rounded-full border border-paper/20 px-3 py-1.5 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-[current=page]:border-gold/60 aria-[current=page]:text-gold"
+					>
+						Résumé
+					</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -32,7 +43,7 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 			aria-controls="site-menu"
 			aria-label="Open menu"
 			title="Open menu"
-			class="group grid size-10 cursor-pointer place-items-center rounded-full border border-paper/15 text-paper/80 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-expanded:border-gold/60 aria-expanded:text-gold md:hidden"
+			class="group grid size-10 cursor-pointer place-items-center rounded-full border border-paper/15 text-paper/80 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-expanded:border-gold/60 aria-expanded:text-gold lg:hidden"
 		>
 			<!-- ☰ morphs into ×: the outer lines slide to the middle and turn 45°, the middle one fades -->
 			<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -49,17 +60,18 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 		id="site-menu"
 		aria-label="Sections"
 		hidden
-		class="-translate-y-2 border-t border-aqua/25 bg-indigo px-4 pt-2 pb-6 opacity-0 data-open:translate-y-0 data-open:opacity-100 motion-safe:transition-[opacity,translate] motion-safe:duration-200 motion-safe:ease-out md:hidden"
+		class="-translate-y-2 border-t border-aqua/25 bg-indigo px-4 pt-2 pb-6 opacity-0 data-open:translate-y-0 data-open:opacity-100 motion-safe:transition-[opacity,translate] motion-safe:duration-200 motion-safe:ease-out lg:hidden"
 	>
 		<ul class="divide-y divide-aqua/15">
-			{sections.map((s, i) => (
+			{[...sections.map((s) => ({ href: `/#${s.id}`, label: s.label })), { href: '/resume/', label: 'Résumé', current: onResume }].map((item, i) => (
 				<li>
 					<a
-						href={`/#${s.id}`}
-						class="flex items-baseline gap-4 py-4 font-display text-title font-bold text-paper transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
+						href={item.href}
+						aria-current={item.current ? 'page' : undefined}
+						class="flex items-baseline gap-4 py-4 font-display text-title font-bold text-paper transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-[current=page]:text-gold"
 					>
 						<span class="font-display text-small font-medium tracking-[0.16em] text-aqua">0{i + 1}</span>
-						{s.label}
+						{item.label}
 					</a>
 				</li>
 			))}
@@ -103,5 +115,5 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 		toggle.focus();
 	});
 	document.addEventListener('click', (e) => open && !header.contains(e.target) && setOpen(false));
-	matchMedia('(min-width: 48rem)').addEventListener('change', (e) => e.matches && setOpen(false));
+	matchMedia('(min-width: 64rem)').addEventListener('change', (e) => e.matches && setOpen(false));
 </script>

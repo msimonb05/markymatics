@@ -1,0 +1,81 @@
+---
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Star from '../components/Star.astro';
+import preview from '../assets/resume/resume-preview.webp';
+
+const pdf = '/resume/mark-simon-bringas-resume.pdf';
+// "Updated" comes from the PDF's own modification date, so replacing the file updates it
+const raw = readFileSync(join(process.cwd(), 'public', pdf), 'latin1');
+const [, year, month] = raw.match(/ModDate\s*\(D:(\d{4})(\d{2})/) ?? [];
+const updated = (year ? new Date(Number(year), Number(month) - 1) : new Date()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const highlights = [
+	{ label: 'Focus', text: 'Back-end development, applied AI and data, IT project leadership' },
+	{ label: 'Education', text: 'BS Computer Science at University of Baguio, graduating June 2027' },
+	{ label: 'Currently', text: 'Research Leader & Back-End Lead, SRLAAS for DepEd SDO Benguet' },
+];
+const label = 'font-display text-small font-medium tracking-[0.16em] text-aqua uppercase';
+const focus = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua';
+---
+
+<Base title="Résumé · Mark Simon Bringas">
+	<main class="mx-auto max-w-2xl px-4 pt-28 pb-8 sm:pt-32 lg:max-w-6xl lg:px-10">
+		<Star divider />
+		<p data-reveal class={label}>Résumé</p>
+		<h1 data-reveal style="--i: 1" class="mt-3 font-display text-display font-bold">The short version.</h1>
+		<p data-reveal style="--i: 2" class="mt-5 max-w-[60ch] text-lead text-paper/80">
+			Everything on this site, condensed into one page for recruiters and hiring teams. Download a copy or view it below.
+		</p>
+		<p data-reveal style="--i: 2" class="mt-3 text-small text-paper/65">Updated {updated}</p>
+
+		<div data-reveal style="--i: 3" class="mt-8 flex flex-wrap items-center gap-3">
+			<a
+				href={pdf}
+				download
+				title="Download my résumé (PDF)"
+				class:list={['inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-display text-body font-bold text-ink transition-colors hover:bg-paper', focus]}
+			>
+				<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14" /></svg>
+				Download PDF
+			</a>
+			<a
+				href={pdf}
+				target="_blank"
+				rel="noopener noreferrer"
+				class:list={['inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3 font-display text-body font-bold text-paper/85 transition-colors hover:border-gold/60 hover:text-gold', focus]}
+			>
+				Open in new tab <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+			</a>
+		</div>
+
+		<dl data-reveal style="--i: 4" class="mt-12 grid gap-6 border-y border-paper/10 py-8 sm:grid-cols-3 sm:gap-10">
+			{highlights.map((h) => (
+				<div>
+					<dt class={label}>{h.label}</dt>
+					<dd class="mt-2 text-body text-paper/85">{h.text}</dd>
+				</div>
+			))}
+		</dl>
+
+		<a
+			data-reveal
+			href={pdf}
+			target="_blank"
+			rel="noopener noreferrer"
+			title="Open the full résumé (PDF)"
+			class:list={['mt-12 block max-w-3xl border border-paper/15 transition-colors hover:border-gold/60', focus]}
+		>
+			<Image
+				src={preview}
+				alt="Résumé of Mark Simon Bringas, page 1"
+				widths={[480, 960, 1600]}
+				sizes="(min-width: 832px) 768px, calc(100vw - 2rem)"
+				class="block h-auto w-full"
+			/>
+			<span class="sr-only">(opens the PDF in a new tab)</span>
+		</a>
+	</main>
+</Base>
