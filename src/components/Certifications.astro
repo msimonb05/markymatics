@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import TechPills from './TechPills.astro';
+import { certifications } from '../data/certifications.js';
+import { icons } from '../data/icons.js';
+
+const linkClass =
+	'inline-flex items-center gap-2 text-small text-paper/75 transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua';
+---
+
+<section id="certifications" aria-labelledby="certifications-title" class="mt-24 sm:mt-32">
+	<h2 id="certifications-title" class="font-display text-display font-bold">Certifications</h2>
+	<ul class="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-3">
+		{certifications.map((c) => (
+			<li>
+				<button
+					type="button"
+					data-open={`cert-${c.id}`}
+					aria-haspopup="dialog"
+					class="group flex w-full cursor-pointer flex-col items-start text-left focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-aqua"
+				>
+					<span class="grid size-32 place-items-center sm:size-36">
+						<Image src={c.badge} alt="" widths={[160, 320]} sizes="144px" class="max-h-full w-auto rounded-md object-contain" />
+					</span>
+					<span class="mt-5 font-display text-title font-bold transition-colors group-hover:text-gold">{c.name}</span>
+					<span class="mt-2 text-small text-paper/65">{c.issuer} · {c.issued}</span>
+					<span class="mt-3 text-small font-medium text-aqua">View details</span>
+				</button>
+
+				<dialog
+					id={`cert-${c.id}`}
+					closedby="any"
+					aria-labelledby={`cert-${c.id}-title`}
+					class="m-auto max-h-[90dvh] w-[min(48rem,calc(100%-2rem))] overflow-y-auto overscroll-contain border border-paper/15 bg-ink p-0 text-paper backdrop:overflow-hidden backdrop:overscroll-contain backdrop:bg-ink/80"
+				>
+					<div class="p-6 sm:p-8">
+						<div class="flex items-start justify-between gap-6">
+							<div>
+								<h3 id={`cert-${c.id}-title`} class="font-display text-headline font-bold text-balance">{c.name}</h3>
+								<p class="mt-2 text-small text-paper/65">{c.issuer} · Issued {c.issued}</p>
+							</div>
+							<form method="dialog">
+								<button
+									aria-label="Close"
+									class="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full border border-paper/15 text-paper/75 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
+								>
+									<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+								</button>
+							</form>
+						</div>
+
+						<Image
+							src={c.certificate}
+							alt={`${c.name} certificate of completion for Mark Simon Bringas`}
+							widths={[640, 1200]}
+							sizes="(min-width: 832px) 704px, calc(100vw - 5rem)"
+							class="mt-6 h-auto w-full border border-paper/15"
+						/>
+						<p class="mt-6 text-body text-paper/80">{c.description}</p>
+						<div class="mt-6">
+							<TechPills stack={c.skills} label="Skills" />
+						</div>
+						<div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+							{c.credly && (
+								<a href={c.credly} target="_blank" rel="noopener noreferrer" class={linkClass}>
+									<svg class="size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d={icons.external} /></svg>
+									Verify on Credly<span class="sr-only"> (opens in a new tab)</span>
+								</a>
+							)}
+							<a href={c.pdf} target="_blank" rel="noopener noreferrer" class={linkClass}>
+								<svg class="size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d={icons.external} /></svg>
+								View certificate (PDF)<span class="sr-only"> (opens in a new tab)</span>
+							</a>
+						</div>
+					</div>
+				</dialog>
+			</li>
+		))}
+	</ul>
+</section>
+
+<script>
+	for (const button of document.querySelectorAll('[data-open]')) {
+		button.addEventListener('click', () => document.getElementById(button.dataset.open).showModal());
+	}
+
+	// Safari has no closedby="any" yet: close on clicks outside the dialog box
+	if (!('closedBy' in HTMLDialogElement.prototype)) {
+		for (const dialog of document.querySelectorAll('dialog[closedby]')) {
+			dialog.addEventListener('click', (e) => {
+				if (e.target !== dialog) return;
+				const r = dialog.getBoundingClientRect();
+				const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
+				if (!inside) dialog.close();
+			});
+		}
+	}
+</script>
