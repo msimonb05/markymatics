@@ -34,3 +34,7 @@ skills-lock.json
 
 # personal learning notes
 docs/
+
+# wrangler pages dev: local secrets and cache
+.dev.vars
+.wrangler/

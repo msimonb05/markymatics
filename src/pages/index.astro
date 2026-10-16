@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Certifications from '../components/Certifications.astro';
-import Certifications from '../components/Certifications.astro';
+import Contact from '../components/Contact.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
 import ProjectPeek from '../components/ProjectPeek.astro';
@@ -207,6 +207,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			</section>
 
 			<Certifications />
+			<Contact />
 		</div>
 	</main>
 </Base>
