@@ -2,12 +2,14 @@
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/instrument-sans';
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 import PixelRain from '../components/PixelRain.astro';
 
 const { title = 'Markymatics' } = Astro.props;
 ---
 
-<html lang="en" class="motion-safe:scroll-smooth">
+<html lang="en" class="scroll-pt-20 motion-safe:scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="/favicon.ico" />
@@ -19,14 +21,11 @@ const { title = 'Markymatics' } = Astro.props;
 	</head>
 	<body class="min-h-dvh bg-ink text-paper font-sans antialiased selection:bg-gold selection:text-ink">
 		<PixelRain />
-		<header class="absolute inset-x-0 top-0 px-4 pt-6 sm:px-10 sm:pt-8">
-			<a href="/" class="font-display text-small font-medium tracking-[0.18em] text-paper/75 uppercase transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">
-				Markymatics
-			</a>
-		</header>
+		<Header />
 		<slot />
+		<Footer />
 		<script>
-			// Marks each [data-reveal] element once it scrolls into view; the CSS plays its stepped fade-up
+			// Marks each [data-reveal] element once it scrolls into view; the CSS plays its fade-up
 			const reveal = new IntersectionObserver(
 				(entries) => {
 					for (const e of entries) {

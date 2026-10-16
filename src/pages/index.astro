@@ -53,7 +53,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			</a>
 		</section>
 
-		<div class="mx-auto max-w-2xl px-4 pb-32 lg:max-w-6xl lg:px-10">
+		<div class="mx-auto max-w-2xl px-4 pb-8 lg:max-w-6xl lg:px-10">
 			<section id="me" class="flex min-h-svh flex-col justify-center py-12">
 				<div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
 					<div
@@ -248,6 +248,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 
 	document.getElementById('name-toggle').addEventListener('click', () => {
 		[name.textContent, nameAlt.textContent] = [nameAlt.textContent, name.textContent];
+		document.getElementById('site-name').textContent = name.textContent;
 		marky = !marky;
 		reduceMotion ? render() : glitch();
 	});

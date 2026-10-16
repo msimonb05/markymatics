@@ -17,15 +17,18 @@
 	const button = document.getElementById('back-to-top');
 	const hero = document.querySelector('[data-hero]');
 	const form = document.getElementById('contact-form');
+	// The footer has its own "Back to top" link, so the button steps aside there too
+	const footer = document.querySelector('body > footer');
 	const heading = hero.querySelector('h1');
 	const seen = new Map();
 
 	const observer = new IntersectionObserver((entries) => {
 		for (const e of entries) seen.set(e.target, e.isIntersecting);
-		button.hidden = Boolean(seen.get(hero) || seen.get(form));
+		button.hidden = Boolean(seen.get(hero) || seen.get(form) || seen.get(footer));
 	});
 	observer.observe(hero);
 	if (form) observer.observe(form);
+	if (footer) observer.observe(footer);
 
 	button.addEventListener('click', () => {
 		// Scroll behavior comes from the page's motion-safe:scroll-smooth, so reduced-motion visitors jump instantly
