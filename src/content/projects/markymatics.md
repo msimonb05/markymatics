@@ -10,6 +10,7 @@ built: A static Astro site styled with Tailwind CSS, with an animated canvas bac
 stack: [Astro, Tailwind CSS, JavaScript, Bun, Cloudflare Pages, Resend]
 github: https://github.com/msimonb05/markymatics
 live: https://markymatics.pages.dev/
+preview: [04-project-page, 06-certifications, 07-contact]
 screenshots:
   01-hero: "The opening screen, where the question decodes from random characters."
   02-intro: "Introduction: name, role, a short statement and social links."

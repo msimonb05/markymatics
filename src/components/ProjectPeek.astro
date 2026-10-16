@@ -3,8 +3,12 @@ import { Image } from 'astro:assets';
 import { screenshotsFor } from '../data/screenshots.js';
 
 const { project, count = 4 } = Astro.props;
-// The wide three-phone composite is left out; it reads poorly as a thumbnail
-const shots = screenshotsFor(project.id).filter((s) => !s.key.endsWith('-mobile'));
+const all = screenshotsFor(project.id);
+// A project can choose its strip with `preview` in its frontmatter; otherwise the first screenshots,
+// minus the wide three-phone composite, which reads poorly as a thumbnail
+const shots = project.data.preview
+	? project.data.preview.map((key) => all.find((s) => s.key === key)).filter(Boolean)
+	: all.filter((s) => !s.key.endsWith('-mobile'));
 const portrait = shots.length > 0 && shots.every((s) => s.portrait);
 ---
 

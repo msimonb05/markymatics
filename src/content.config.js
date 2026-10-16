@@ -23,6 +23,8 @@ const projects = defineCollection({
 		liveLabel: z.string().optional(),
 		// Carousel captions keyed by screenshot file name, e.g. 01-dashboard
 		screenshots: z.record(z.string(), z.string()).optional(),
+		// Which screenshots the home page preview strip shows, by file name; defaults to the first ones
+		preview: z.array(z.string()).optional(),
 	}),
 });
 
