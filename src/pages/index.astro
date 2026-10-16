@@ -43,6 +43,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			<a
 				href="#me"
 				aria-label="Scroll down to personal details"
+				title="Scroll down to personal details"
 				class="absolute inset-x-0 bottom-6 mx-auto grid size-16 place-items-center rounded-full text-paper/60 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-aqua sm:bottom-10"
 			>
 				<svg class="size-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -57,6 +58,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 				<div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
 					<div
 						id="photos"
+						title="It’s me~"
 						role="img"
 						aria-label="Photos of Mark Simon Bringas"
 						class="group relative size-[clamp(9rem,50vw,12rem)] shrink-0 overflow-hidden border border-paper/20 sm:size-44 lg:size-64"
@@ -98,6 +100,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 							<div class="grid h-[1lh] shrink-0 place-items-center">
 								<button
 									id="name-toggle"
+									title="Swap my name~"
 									type="button"
 									aria-label="Swap name and nickname"
 									class="grid size-12 cursor-pointer place-items-center rounded-full border border-paper/15 text-aqua transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
@@ -135,6 +138,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label={s.label}
+									title={s.label}
 									class="grid size-11 place-items-center rounded-full border border-paper/15 text-paper/75 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua"
 								>
 									<svg class="size-5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
