@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import BackToTop from '../components/BackToTop.astro';
 import Certifications from '../components/Certifications.astro';
 import Contact from '../components/Contact.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
@@ -30,10 +31,10 @@ const built = projects.filter((p) => p.data.group === 'built');
 
 <Base title="Mark Simon Bringas">
 	<main>
-		<section class="relative grid min-h-dvh place-items-center px-4 py-24">
+		<section data-hero class="relative grid min-h-dvh place-items-center px-4 py-24">
 			<div class="flex flex-col items-center gap-6 sm:gap-8">
 				<Star class="size-7 sm:size-9" />
-				<h1 class="text-center font-display text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
+				<h1 tabindex="-1" class="text-center font-display focus:outline-none text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
 					Woah!
 					<span class="block font-light text-aqua">How did you get here<span class="text-gold">?</span></span>
 				</h1>
@@ -206,6 +207,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			<Contact />
 		</div>
 	</main>
+	<BackToTop />
 </Base>
 
 <script>
