@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Star from './Star.astro';
 import TechPills from './TechPills.astro';
 import { certifications } from '../data/certifications.js';
 import { icons } from '../data/icons.js';
@@ -9,6 +10,7 @@ const linkClass =
 ---
 
 <section id="certifications" aria-labelledby="certifications-title" class="mt-24 sm:mt-32">
+	<Star divider />
 	<h2 id="certifications-title" class="font-display text-display font-bold">Certifications</h2>
 	<ul class="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-3">
 		{certifications.map((c) => (

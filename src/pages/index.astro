@@ -7,6 +7,7 @@ import Contact from '../components/Contact.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
 import ProjectPeek from '../components/ProjectPeek.astro';
+import Star from '../components/Star.astro';
 import TechPills from '../components/TechPills.astro';
 import { skills } from '../data/skills.js';
 import { socials } from '../data/socials.js';
@@ -31,14 +32,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 	<main>
 		<section class="relative grid min-h-dvh place-items-center px-4 py-24">
 			<div class="flex flex-col items-center gap-6 sm:gap-8">
-				<svg
-					class="size-7 text-gold sm:size-9"
-					viewBox="0 0 24 24"
-					fill="currentColor"
-					aria-hidden="true"
-				>
-					<path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z" />
-				</svg>
+				<Star class="size-7 sm:size-9" />
 				<h1 class="text-center font-display text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
 					Woah!
 					<span class="block font-light text-aqua">How did you get here<span class="text-gold">?</span></span>
@@ -153,6 +147,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			</section>
 
 			<section id="projects" aria-labelledby="projects-title" class="mt-16 sm:mt-24">
+				<Star divider />
 				<h2 id="projects-title" class="font-display text-display font-bold">Projects</h2>
 
 				<h3 class="mt-14 font-display text-headline font-bold">Led and built</h3>
@@ -193,6 +188,7 @@ const built = projects.filter((p) => p.data.group === 'built');
 			</section>
 
 			<section id="skills" aria-labelledby="skills-title" class="mt-24 sm:mt-32">
+				<Star divider />
 				<h2 id="skills-title" class="font-display text-display font-bold">Skills</h2>
 				<ul class="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
 					{skills.map((s) => (
