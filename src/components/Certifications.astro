@@ -87,14 +87,49 @@ const linkClass =
 		button.addEventListener('click', () => document.getElementById(button.dataset.open).showModal());
 	}
 
-	// Safari has no closedby="any" yet: close on clicks outside the dialog box
-	if (!('closedBy' in HTMLDialogElement.prototype)) {
-		for (const dialog of document.querySelectorAll('dialog[closedby]')) {
+	// Firefox and Safari drop the dialog before its exit transition plays, so fade it out first
+	function canAnimateExit() {
+		if (!CSS.supports('overlay', 'auto')) return false;
+		const probe = document.createElement('div');
+		probe.style.cssText = 'transition: display 1s allow-discrete !important; display: block;';
+		document.body.append(probe);
+		getComputedStyle(probe).display;
+		probe.style.display = 'none';
+		const ok = getComputedStyle(probe).display === 'block';
+		probe.remove();
+		return ok;
+	}
+	const nativeExit = canAnimateExit();
+
+	async function closeDialog(dialog) {
+		if (!nativeExit) {
+			dialog.setAttribute('data-closing', '');
+			await Promise.race([
+				Promise.allSettled(dialog.getAnimations({ subtree: true }).map((a) => a.finished)),
+				new Promise((r) => setTimeout(r, 500)),
+			]);
+			if (!dialog.hasAttribute('data-closing')) return;
+			dialog.removeAttribute('data-closing');
+		}
+		dialog.close();
+	}
+
+	for (const dialog of document.querySelectorAll('dialog[closedby]')) {
+		dialog.addEventListener('cancel', (e) => {
+			e.preventDefault();
+			closeDialog(dialog);
+		});
+		dialog.querySelector('form[method="dialog"]').addEventListener('submit', (e) => {
+			e.preventDefault();
+			closeDialog(dialog);
+		});
+		// Safari has no closedby="any" yet: close on clicks outside the dialog box
+		if (!('closedBy' in HTMLDialogElement.prototype)) {
 			dialog.addEventListener('click', (e) => {
 				if (e.target !== dialog) return;
 				const r = dialog.getBoundingClientRect();
 				const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
-				if (!inside) dialog.close();
+				if (!inside) closeDialog(dialog);
 			});
 		}
 	}

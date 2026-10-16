@@ -126,6 +126,31 @@
     color: var(--color-aqua);
     opacity: 0.6;
   }
+
+  /* data-closing: exit fallback where display/overlay can't transition (Firefox, Safari) */
+  dialog,
+  dialog::backdrop {
+    opacity: 0;
+    transition: opacity 200ms var(--ease-reveal), transform 200ms var(--ease-reveal), display 200ms, overlay 200ms;
+    transition-behavior: allow-discrete;
+  }
+  dialog {
+    transform: translateY(0.5rem) scale(0.98);
+  }
+  dialog[open]:not([data-closing]) {
+    opacity: 1;
+    transform: none;
+    @starting-style {
+      opacity: 0;
+      transform: translateY(0.5rem) scale(0.98);
+    }
+    &::backdrop {
+      opacity: 1;
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
 }
 
 @keyframes reveal-step {
