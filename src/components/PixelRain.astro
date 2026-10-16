@@ -21,6 +21,9 @@
 	const STILL_TIME = 0.4; // seconds without movement before the cursor counts as resting
 	const SMOOTH = false;
 	const FPS = 12;
+	const SCROLL_BOOST = 2; // extra drop speed while scrolling fast, on top of 1x
+	const SCROLL_GAIN = 0.6; // boost per px/ms of scroll speed
+	const BOOST_DECAY = 3; // per second, back to normal speed after scrolling stops
 
 	const canvas = document.getElementById('pixel-rain');
 	const ctx = canvas.getContext('2d');
@@ -34,6 +37,8 @@
 	let streaks = [];
 	let raf = 0, last = 0;
 	const pointer = { x: -1e4, y: -1e4, moved: 0 };
+	let boost = 1;
+	let lastScroll = { y: scrollY, ms: performance.now() };
 
 	const now = () => performance.now() / 1000;
 	const quantize = (v) => (SMOOTH ? v : Math.round(v * FADE_STEPS) / FADE_STEPS);
@@ -123,9 +128,10 @@
 			ctx.fillRect(d.x, d.y, size, size);
 		}
 
+		boost = 1 + (boost - 1) * Math.exp(-dt * BOOST_DECAY);
 		for (let c = 0; c < cols; c++) {
 			const s = streaks[c];
-			s.head += s.speed * dt;
+			s.head += s.speed * dt * boost;
 			if (s.head - s.len > rows) spawn(s, false);
 
 			const head = SMOOTH ? s.head : Math.floor(s.head);
@@ -163,6 +169,17 @@
 		if (reduceMotion.matches) step(0, now());
 	}).observe(canvas);
 	reduceMotion.addEventListener('change', start);
+	// Drops fall faster while the page scrolls, as if moving through the rain
+	window.addEventListener(
+		'scroll',
+		() => {
+			const ms = performance.now();
+			const speed = Math.abs(scrollY - lastScroll.y) / Math.max(ms - lastScroll.ms, 1);
+			lastScroll = { y: scrollY, ms };
+			boost = Math.max(boost, 1 + Math.min(speed * SCROLL_GAIN, SCROLL_BOOST));
+		},
+		{ passive: true },
+	);
 	window.addEventListener('pointermove', (e) => {
 		if (e.pointerType === 'touch') return;
 		pointer.x = e.clientX * dpr;
