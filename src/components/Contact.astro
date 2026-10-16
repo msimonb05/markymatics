@@ -1,9 +1,8 @@
 ---
 import { socials } from '../data/socials.js';
 
-// Cloudflare's always-pass test key until the real one is set; the server's secret
-// key decides, so a test token fails against a real secret instead of letting bots in
-const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA';
+// Public by design; set PUBLIC_TURNSTILE_SITE_KEY in Cloudflare Pages
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 const label = 'font-display text-small font-medium tracking-[0.16em] text-aqua uppercase';
 const field =
@@ -70,13 +69,17 @@ const field =
 	const form = document.getElementById('contact-form');
 	const status = document.getElementById('contact-status');
 	const button = form.querySelector('button[type="submit"]');
+	const loaded = performance.now();
 
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		button.disabled = true;
 		status.textContent = 'Sending...';
 		try {
-			const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+			const body = new FormData(form);
+			// Time on the page; the server drops posts made faster than a person could type
+			body.append('elapsed', String(Math.round(performance.now() - loaded)));
+			const res = await fetch(form.action, { method: 'POST', body });
 			const data = await res.json().catch(() => ({}));
 			if (!res.ok) throw new Error(data.error);
 			form.reset();
