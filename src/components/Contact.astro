@@ -12,7 +12,10 @@ const field =
 
 <section id="contact" aria-labelledby="contact-title" class="mt-24 sm:mt-32">
 	<Star divider />
-	<h2 id="contact-title" class="font-display text-display font-bold text-balance">Woah! You made it to the bottom...</h2>
+	<h2 id="contact-title" class="font-display text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
+		Woah!
+		<span class="block font-light text-aqua">You made it to the bottom<span class="text-gold">...</span></span>
+	</h2>
 	<p class="mt-5 max-w-[60ch] text-lead text-paper/80">
 		I really appreciate you taking the time to look through my work. Send me a message and I'll get back to you.
 	</p>
@@ -28,7 +31,7 @@ const field =
 		</label>
 		<label class="block sm:col-span-2">
 			<span class={label}>Message</span>
-			<textarea name="message" required maxlength="5000" rows="5" placeholder="What would you like to work on?" class={field}></textarea>
+			<textarea name="message" required maxlength="5000" rows="5" placeholder="What would you like to work on?" class:list={[field, 'max-h-80 min-h-36 resize-y']}></textarea>
 		</label>
 		<!-- Honeypot: hidden from people, filled in by bots -->
 		<div aria-hidden="true" class="absolute -left-[9999px]">
