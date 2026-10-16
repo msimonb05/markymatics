@@ -11,10 +11,10 @@ const linkClass =
 
 <section id="certifications" aria-labelledby="certifications-title" class="mt-24 sm:mt-32">
 	<Star divider />
-	<h2 id="certifications-title" class="font-display text-display font-bold">Certifications</h2>
+	<h2 data-reveal style="--i: 1" id="certifications-title" class="font-display text-display font-bold">Certifications</h2>
 	<ul class="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-3">
-		{certifications.map((c) => (
-			<li>
+		{certifications.map((c, i) => (
+			<li data-reveal style={`--i: ${i}`}>
 				<button
 					type="button"
 					data-open={`cert-${c.id}`}

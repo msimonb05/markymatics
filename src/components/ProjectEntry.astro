@@ -8,7 +8,7 @@ const { data, id } = project;
 const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 ---
 
-<li class="py-10 sm:py-12">
+<li data-reveal class="py-10 sm:py-12">
 	<h4 class="max-w-[30ch] font-display text-title font-bold text-balance">
 		<a href={`/projects/${id}/`} class="transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">
 			{data.title}

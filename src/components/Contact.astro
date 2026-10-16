@@ -12,15 +12,15 @@ const field =
 
 <section id="contact" aria-labelledby="contact-title" class="mt-24 sm:mt-32">
 	<Star divider />
-	<h2 id="contact-title" class="font-display text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
+	<h2 data-reveal style="--i: 1" id="contact-title" class="font-display text-[clamp(3rem,10vw,6.5rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
 		Woah!
 		<span class="block font-light text-aqua">You made it to the bottom<span class="text-gold">...</span></span>
 	</h2>
-	<p class="mt-5 max-w-[60ch] text-lead text-paper/80">
+	<p data-reveal style="--i: 2" class="mt-5 max-w-[60ch] text-lead text-paper/80">
 		I really appreciate you taking the time to look through my work. Send me a message and I'll get back to you.
 	</p>
 
-	<form id="contact-form" action="/api/contact" method="post" class="mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+	<form data-reveal style="--i: 3" id="contact-form" action="/api/contact" method="post" class="mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
 		<label class="block">
 			<span class={label}>Name</span>
 			<input name="name" required maxlength="100" autocomplete="name" placeholder="Your name" class={field} />

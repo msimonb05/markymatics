@@ -79,3 +79,77 @@
     scrollbar-color: var(--color-teal) var(--color-ink);
   }
 }
+
+/* Scroll motion is smooth (ease-out: quick start, gentle landing); the hero's decoder and glitch stay
+   stepped on purpose, like the pixel rain. Everything here is skipped for visitors who prefer reduced motion. */
+:root {
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* .reveal-ready is added by a head script, so content stays visible if JavaScript never runs */
+  .reveal-ready [data-reveal]:not([data-shown]) {
+    opacity: 0;
+  }
+  [data-reveal][data-shown] {
+    animation: reveal-step 600ms var(--ease-reveal) both;
+    animation-delay: calc(min(var(--i, 0), 5) * 70ms);
+  }
+
+  .reveal-ready [data-reveal]:not([data-shown]) .divider-line {
+    scale: 0 1;
+  }
+  [data-shown] .divider-line {
+    transform-origin: left;
+    animation: divider-draw 700ms var(--ease-reveal) both;
+  }
+  [data-shown] .divider-star {
+    animation: star-turn 700ms var(--ease-reveal) both;
+  }
+
+  [data-glitching] {
+    animation: glitch-text 450ms steps(1, end) both;
+  }
+
+  /* Hero decoder: an unresolved letter hides its real glyph and shows a random one on top,
+     so each letter keeps its real width and the line never shifts */
+  [data-decoding] [data-char]:not([data-done]) {
+    position: relative;
+    color: transparent;
+    clip-path: inset(0); /* wide glyphs like @ stay inside their letter's box */
+  }
+  [data-decoding] [data-char]:not([data-done])::after {
+    content: attr(data-glyph);
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    color: var(--color-aqua);
+    opacity: 0.6;
+  }
+}
+
+@keyframes reveal-step {
+  from { opacity: 0; translate: 0 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes divider-draw {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
+
+@keyframes star-turn {
+  from { rotate: -90deg; }
+  to { rotate: 0deg; }
+}
+
+@keyframes glitch-text {
+  0%, 100% { text-shadow: none; translate: 0 0; clip-path: none; }
+  /* The site palette in pairs: aqua/violet, gold/teal, then mixed, so each frame flashes a different accent */
+  15% { text-shadow: -3px 0 var(--color-aqua), 3px 0 var(--color-violet); translate: -3px 0; }
+  30% { text-shadow: 4px 0 var(--color-gold), -4px 0 var(--color-teal); translate: 2px 0; clip-path: inset(10% 0 45% 0); }
+  45% { text-shadow: -2px 0 var(--color-violet), 2px 0 var(--color-aqua); translate: 0 1px; clip-path: none; }
+  60% { text-shadow: 5px 0 var(--color-teal), -5px 0 var(--color-gold); translate: 4px 0; clip-path: inset(55% 0 5% 0); }
+  75% { text-shadow: -3px 0 var(--color-gold), 3px 0 var(--color-violet); translate: -2px -1px; clip-path: none; }
+  90% { text-shadow: 1px 0 var(--color-aqua); translate: 1px 0; }
+}
