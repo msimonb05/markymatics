@@ -3,12 +3,13 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Certifications from '../components/Certifications.astro';
+import Certifications from '../components/Certifications.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
 import ProjectPeek from '../components/ProjectPeek.astro';
 import TechPills from '../components/TechPills.astro';
-import { icons } from '../data/icons.js';
 import { skills } from '../data/skills.js';
+import { socials } from '../data/socials.js';
 import cordinnovationPic from '../assets/photos/cordinnovation_pic.jpg';
 import graduationPic from '../assets/photos/graduation_pic.jpg';
 import mirrorSelfie from '../assets/photos/mirror_selfie.webp';
@@ -19,12 +20,6 @@ const photos = [
 	{ src: cordinnovationPic, position: 'object-center' },
 	{ src: graduationPic, position: 'object-[80%_50%]' },
 	{ src: mirrorSelfie, position: 'object-center' },
-];
-
-const socials = [
-	{ label: 'GitHub', href: 'https://github.com/msimonb05', path: icons.github },
-	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/mark-simon-bringas/', path: icons.linkedin },
-	{ label: 'X (Twitter)', href: 'https://x.com/msimonb_05', path: icons.x },
 ];
 
 const projects = (await getCollection('projects')).sort((a, b) => b.data.sort - a.data.sort);
