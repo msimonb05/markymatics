@@ -1,7 +1,7 @@
 ---
 title: 'WhiteL Studio: Portfolio & Content Management System'
 short: WhiteL Studio
-tagline: A portfolio site and content management system for an independent animation and game studio.
+tagline: A portfolio site and content management system for a talent agency and production studio.
 role: Lead Developer
 period: Sep 2026 – Present
 sort: 202609
@@ -13,7 +13,7 @@ github: https://github.com/msimonb05/WhiteL-Studio
 
 ## The problem
 
-WhiteL Studio, an independent animation and game studio with more than 15 people, needed a portfolio site that its staff could update without a developer.
+WhiteL Studio, a talent agency and production studio with more than 15 people, needed a portfolio site that its staff could update without a developer.
 
 ## What I am building
 
