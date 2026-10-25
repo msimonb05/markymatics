@@ -1,0 +1,12 @@
+{
+  "name": "Mark Simon Bringas",
+  "short_name": "markymatics",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "background_color": "#191a2c",
+  "theme_color": "#191a2c",
+  "display": "browser"
+}
