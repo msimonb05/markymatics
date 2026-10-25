@@ -9,10 +9,10 @@
   --color-violet: #7b68c8;
   --color-paper: #f2f6f4;
 
-  /* Primary: Space Grotesk for headings, wordmark. */ 
-  /* Secondary: Instrument Sans for body/UI text. */
+  /* Primary: Space Grotesk for headings, wordmark. */
+  /* Secondary: Atkinson Hyperlegible Next for body/UI text. */
   --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
-  --font-sans: 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-sans: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
 
   /* Type scale, largest to smallest. The hero ("Woah!") is intentionally outside it. */
   --text-display: clamp(2.75rem, 9vw, 6rem);
@@ -103,7 +103,7 @@
     transform-origin: left;
     animation: divider-draw 700ms var(--ease-reveal) both;
   }
-  [data-shown] .divider-star {
+  [data-shown] .divider-mark {
     animation: star-turn 700ms var(--ease-reveal) both;
   }
 

@@ -17,11 +17,11 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 ---
 
 <Base title={`${data.short} · Mark Simon Bringas`}>
-	<main class="mx-auto max-w-2xl px-4 pt-28 pb-8 sm:pt-32 lg:max-w-6xl lg:px-10">
+	<main class="mx-auto max-w-6xl px-4 pt-28 pb-8 sm:pt-32 lg:px-10">
 		<a
 			id="back"
 			href="/#projects"
-			class="inline-flex items-center gap-2 text-small text-paper/75 transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua"
+			class="inline-flex items-center gap-2 text-small text-paper/80 transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua"
 		>
 			<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 				<path d="m15 18-6-6 6-6" />
@@ -29,10 +29,10 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 			Back
 		</a>
 
-		<h1 class="mt-10 max-w-[18ch] font-display text-display font-bold text-balance">
+		<h1 class="mt-10 max-w-[18ch] font-display text-display font-medium text-balance">
 			{data.title}
 		</h1>
-		<p class="mt-5 text-small text-paper/65 tabular-nums">{meta}</p>
+		<p class="mt-5 text-small text-paper/80 tabular-nums">{meta}</p>
 		<p class="mt-6 max-w-[55ch] text-lead text-paper/90">{data.tagline}</p>
 
 		<div class="mt-10">
@@ -47,7 +47,7 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 		<hr class="mt-12 h-0.5 w-20 border-0 bg-gold" />
 
 		<div
-			class="mt-4 max-w-[65ch] text-body text-paper/80 [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-title [&_h2]:font-bold [&_h2]:text-paper [&_li]:mt-2 [&_li]:pl-1 [&_p]:mt-4 [&_strong]:text-paper [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-gold"
+			class="mt-4 max-w-[65ch] text-body text-paper/90 [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-title [&_h2]:font-medium [&_h2]:text-paper [&_li]:mt-2 [&_li]:pl-1 [&_p]:mt-4 [&_strong]:text-paper [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-gold"
 		>
 			<Content />
 		</div>
