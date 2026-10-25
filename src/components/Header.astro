@@ -15,8 +15,13 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 <!-- Fixed (always on screen) and see-through: a light ink tint plus blur keeps the text readable over the page -->
 <header id="site-header" class="fixed inset-x-0 top-0 z-50 bg-ink/45 backdrop-blur-md">
 	<div class="flex h-14 items-center justify-between gap-6 px-4 font-display text-small font-medium tracking-[0.18em] text-paper/80 uppercase sm:h-16 sm:px-10">
-		<!-- The home page's name swap also updates this (#site-name) -->
-		<a href="/" id="site-name" class:list={[link, 'whitespace-nowrap']}>Mark Simon Bringas</a>
+		<!-- Logo lockup. The home page's name swap updates #site-name-text; the footer's back-to-top focuses #site-name -->
+		<a href="/" id="site-name" title="Home" class:list={[link, 'flex items-center gap-2.5 font-semibold tracking-[-0.01em] whitespace-nowrap text-paper normal-case text-body']}>
+			<svg class="size-5.5 shrink-0 text-gold" viewBox="36 36 184 184" fill="currentColor" aria-hidden="true">
+				<path d="M36 36L128 128L220 36V220H156V184H184V128.6L128 184.6L72 128.6V184H100V220H36Z" />
+			</svg>
+			<span id="site-name-text">Mark Simon Bringas</span>
+		</a>
 
 		<nav aria-label="Sections" class="hidden lg:block">
 			<ul class="flex items-center gap-6">

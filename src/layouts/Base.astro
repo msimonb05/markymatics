@@ -12,7 +12,10 @@ const { title = 'Markymatics' } = Astro.props;
 <html lang="en" class="scroll-pt-20 motion-safe:scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.ico" />
+		<!-- .ico only (no SVG icon): its 16px image is hand-drawn on the pixel grid, which an SVG would blur -->
+		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+		<link rel="apple-touch-icon" href="/markymatics-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>

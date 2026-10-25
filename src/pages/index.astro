@@ -273,7 +273,7 @@ const usedIn = (items) =>
 
 	document.getElementById('name-toggle').addEventListener('click', () => {
 		[name.textContent, nameAlt.textContent] = [nameAlt.textContent, name.textContent];
-		document.getElementById('site-name').textContent = name.textContent;
+		document.getElementById('site-name-text').textContent = name.textContent;
 		marky = !marky;
 		reduceMotion ? render() : glitch();
 	});
