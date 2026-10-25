@@ -16,7 +16,7 @@ const button =
 
 {shots.length > 0 && (
 	<section aria-labelledby="screenshots-title" class="mt-14">
-		<h2 id="screenshots-title" class="font-display text-title font-bold">Screenshots</h2>
+		<h2 id="screenshots-title" class="font-display text-title font-medium">Screenshots</h2>
 		<div data-carousel role="region" aria-roledescription="carousel" aria-labelledby="screenshots-title" class="mt-6">
 			<ul
 				data-track
@@ -46,9 +46,9 @@ const button =
 				))}
 			</ul>
 			<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
-				<p data-text aria-live="polite" class="min-h-[2lh] flex-1 text-body text-paper/80">{shots[0].caption}</p>
+				<p data-text aria-live="polite" class="min-h-[2lh] flex-1 text-body text-paper/90">{shots[0].caption}</p>
 				<div class="flex items-center justify-end gap-4">
-					<p data-count class="text-small text-paper/65 tabular-nums">1 / {shots.length}</p>
+					<p data-count class="text-small text-paper/80 tabular-nums">1 / {shots.length}</p>
 					<button data-prev type="button" aria-label="Previous screenshot" title="Previous screenshot" disabled class={button}>
 						<svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
 					</button>

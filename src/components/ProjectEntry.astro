@@ -9,12 +9,12 @@ const meta = [data.role, data.team, data.period].filter(Boolean).join(' · ');
 ---
 
 <li data-reveal class="py-10 sm:py-12">
-	<h4 class="max-w-[30ch] font-display text-title font-bold text-balance">
+	<h4 class="max-w-[30ch] font-display text-title font-medium text-balance">
 		<a href={`/projects/${id}/`} class="transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua">
 			{data.title}
 		</a>
 	</h4>
-	<p class="mt-2 text-small text-paper/65 tabular-nums">{meta}</p>
+	<p class="mt-2 text-small text-paper/80 tabular-nums">{meta}</p>
 	<p class="mt-4 max-w-[65ch] text-lead text-paper/90">{data.tagline}</p>
 	<div class="mt-6">
 		<ProjectFacts data={data} />

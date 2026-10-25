@@ -24,11 +24,11 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 					<li><a href={`/#${s.id}`} class={link}>{s.label}</a></li>
 				))}
 				<li>
-					<!-- A separate page, so it's a pill rather than another section link -->
+					<!-- A separate page, so it's gold rather than another section link -->
 					<a
 						href="/resume/"
 						aria-current={onResume ? 'page' : undefined}
-						class="rounded-full border border-paper/20 px-3 py-1.5 transition-colors hover:border-gold/60 hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-[current=page]:border-gold/60 aria-[current=page]:text-gold"
+						class="text-gold transition-colors hover:text-paper focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-aqua"
 					>
 						Résumé
 					</a>
@@ -68,7 +68,7 @@ const line = 'origin-center [transform-box:view-box] motion-safe:transition-[tra
 					<a
 						href={item.href}
 						aria-current={item.current ? 'page' : undefined}
-						class="flex items-baseline gap-4 py-4 font-display text-title font-bold text-paper transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-[current=page]:text-gold"
+						class="flex items-baseline gap-4 py-4 font-display text-title font-medium text-paper transition-colors hover:text-gold focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua aria-[current=page]:text-gold"
 					>
 						<span class="font-display text-small font-medium tracking-[0.16em] text-aqua">0{i + 1}</span>
 						{item.label}
