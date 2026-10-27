@@ -1,5 +1,6 @@
 import {
 	siAstro,
+	siBootstrap,
 	siBun,
 	siCloudflare,
 	siCloudflarepages,
@@ -14,9 +15,11 @@ import {
 	siGit,
 	siGithub,
 	siGithubactions,
+	siGithubpages,
 	siHtml5,
 	siHuggingface,
 	siJavascript,
+	siJinja,
 	siKubernetes,
 	siLangchain,
 	siMariadb,
@@ -80,5 +83,8 @@ export const techIcons = {
 	SciPy: siScipy,
 	Git: siGit,
 	Trello: siTrello,
+	Jinja: siJinja,
+	Bootstrap: siBootstrap,
+	'GitHub Pages': siGithubpages,
 	'GitHub Projects': siGithub,
 };
